@@ -4,12 +4,12 @@ require_once __DIR__ . '/include/init.php';
 
 require __DIR__ . '/layout/top.php';
 
-$query = 'SELECT * FROM utilisateur WHERE id = ' . $_SESSION['utilisateur']['id'];
+$query = 'SELECT prenom, nom, email, adresse, ville, role FROM utilisateur WHERE id = ' . $_SESSION['utilisateur']['id'];
 
 $stmt = $pdo->query($query);
 $utilisateur = $stmt->fetch();
 
-dump($utilisateur);
+
 
 
 ?>
@@ -18,10 +18,24 @@ dump($utilisateur);
 
 <h3 class="mb-3">Vos infos</h3>
 
-<p>Votre prénom : <span class="font-weight-bold"><?=$utilisateur['prenom']?></span></p>
+<div class="container row">
+    <div class="col">
+    <?php
 
-<p>Votre nom : <span class="font-weight-bold"><?=$utilisateur['nom']?></span></p>
+    foreach ($utilisateur as $id => $user) :
+    ?>
+    <p>Votre <?= $id ?> : <span class="font-weight-bold"><?=$user?></span></p>
+    <?php
+    endforeach;
+    ?>
 
-
-
-
+<button class="btn btn-primary"><a class="badge badge-primary" href="<?=RACINE_WEB?>modifier.php">Modifier</a></button>
+    </div>
+    <div class="col">
+        
+        <div class="image">
+            <img src="">
+        </div>
+        
+    </div>
+</div>
